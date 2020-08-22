@@ -1,2 +1,3 @@
+include ':remotecontrol'
 include ':app'
 rootProject.name = "RemoteControlDemo"

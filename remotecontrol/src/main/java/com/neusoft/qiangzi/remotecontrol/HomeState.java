@@ -1,4 +1,4 @@
-package com.neusoft.qiangzi.remotecontroldemo;
+package com.neusoft.qiangzi.remotecontrol;
 
 public class HomeState {
     private boolean ketingLightOn;

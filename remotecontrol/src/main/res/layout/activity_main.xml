@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:id="@+id/etTemp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:text="26"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/switchAirCon"
+            app:layout_constraintTop_toBottomOf="@+id/switchAirCon" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="远程遥控我的家"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.157" />
+
+        <Switch
+            android:id="@+id/switchKeTingLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="客厅灯"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <Switch
+            android:id="@+id/switchWoShiLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="卧室灯"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/switchKeTingLight"
+            app:layout_constraintTop_toBottomOf="@+id/switchKeTingLight" />
+
+        <Switch
+            android:id="@+id/switchAirCon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="空调开关"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/switchWoShiLight"
+            app:layout_constraintTop_toBottomOf="@+id/switchWoShiLight" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="空调温度"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/etTemp"
+            app:layout_constraintEnd_toStartOf="@+id/etTemp"
+            app:layout_constraintTop_toTopOf="@+id/etTemp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
