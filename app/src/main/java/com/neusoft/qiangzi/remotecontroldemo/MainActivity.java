@@ -79,12 +79,9 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                 tvTemp.setText(String.valueOf(i+15));
                 tvTemp3.setText(String.valueOf(i+15));
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 viewModel.setAirconTemp(seekBar.getProgress()+15);
@@ -115,31 +112,47 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
                 seekBar.setProgress(homeState.getAirconTemp()-15);
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         Intent i = new Intent();
         i.setComponent(new ComponentName("com.neusoft.qiangzi.socketservicedemo","com.neusoft.qiangzi.socketservicedemo.SocketService"));
         bindService(i, this, BIND_AUTO_CREATE);
     }
 
     @Override
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+    protected void onStop() {
+        super.onStop();
+        if(binder!=null){
+            try {
+                binder.unregisterListener(receiveListener);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        unbindService(this);
+    }
 
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         binder = ISocketBinder.Stub.asInterface(iBinder);
         viewModel.setBinder(binder);
         try {
-            binder.registerListener(new IOnSocketReceivedListener.Stub() {
-                @Override
-                public void onReceived(String data) throws RemoteException {
-                    viewModel.receivedRometeCommand(data);
-                }
-            });
+            binder.registerListener(receiveListener);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
+    private IOnSocketReceivedListener receiveListener = new IOnSocketReceivedListener.Stub() {
+        @Override
+        public void onReceived(String data) throws RemoteException {
+            viewModel.receivedRometeCommand(data);
+        }
+    };
     @Override
     public void onServiceDisconnected(ComponentName componentName) {
-
     }
 }
